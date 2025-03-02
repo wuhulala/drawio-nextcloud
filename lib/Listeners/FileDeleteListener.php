@@ -8,7 +8,7 @@ use OCP\Files\Events\Node\NodeDeletedEvent;
 use OCP\Files\Folder;
 use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
-use OCP\ILogger;
+use Psr\Log\LoggerInterface;
 
 class FileDeleteListener implements IEventListener {
 
@@ -18,7 +18,7 @@ class FileDeleteListener implements IEventListener {
     /** @var IAppData */
     private $appData;
 
-	public function __construct(ILogger $logger, IAppData $appData)
+	public function __construct(LoggerInterface $logger, IAppData $appData)
     {
         $this->logger = $logger;
         $this->appData = $appData;

@@ -38,7 +38,14 @@ class Application extends App {
 
         parent::__construct($appName, $urlParams);
 
-        $this->appConfig = new AppConfig($appName);
+        $container = $this->getContainer();
+
+        $container->registerService("Logger", function($c)
+         {
+              return $c->query(\Psr\Log\LoggerInterface::class);
+         });
+
+        $this->appConfig = new AppConfig($appName, $container->query("Logger"));
 
         // Default script and style if configured
         if (!empty($this->appConfig->GetDrawioUrl()) && array_key_exists("REQUEST_URI", \OC::$server->getRequest()->server))
@@ -54,7 +61,6 @@ class Application extends App {
             }
         }
         
-        $container = $this->getContainer();
 
         $container->registerService("L10N", function($c)
         {
@@ -71,10 +77,7 @@ class Application extends App {
             return $c->query("ServerContainer")->getUserSession();
         });
 
-        $container->registerService("Logger", function($c)
-        {
-            return $c->query("ServerContainer")->getLogger();
-        });
+
 
 
         $container->registerService("SettingsController", function($c)

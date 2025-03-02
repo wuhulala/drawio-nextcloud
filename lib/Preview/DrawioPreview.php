@@ -9,8 +9,8 @@ use OCP\AppFramework\QueryException;
 use OCP\Files\FileInfo;
 use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
-use OCP\ILogger;
 use OCP\Image;
+use Psr\Log\LoggerInterface;
 
 use OCA\Drawio\AppConfig;
 
@@ -32,12 +32,12 @@ class DrawioPreview extends Provider
         "application/x-drawio-wb"
     ];
 
-    public function __construct(ILogger $logger, IAppData $appData)
+    public function __construct(LoggerInterface $logger, IAppData $appData)
     {
         $this->logger = $logger;
         $this->appData = $appData;
         $this->appName = 'drawio';
-        $this->appConfig = new AppConfig($this->appName);
+        $this->appConfig = new AppConfig($this->appName,  $logger);
     }
 
     /**

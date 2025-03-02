@@ -43,12 +43,12 @@ class AppConfig {
     private $_previews = "DrawioPreviews";
     private $_drawioConfig = "DrawioConfig";
 
-    public function __construct($AppName)
+    public function __construct($AppName,LoggerInterface $logger)
     {
         $this->appName = $AppName;
 
         $this->config = \OC::$server->getConfig();
-        $this->logger = \OC::$server->getLogger();
+        $this->logger = $logger;
     }
 
     public function SetDrawioUrl($drawio)

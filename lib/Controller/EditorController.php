@@ -23,7 +23,6 @@ use OCP\Constants;
 use OCP\Files\FileInfo;
 use OCP\Files\IRootFolder;
 use OCP\IL10N;
-use OCP\ILogger;
 use OCP\IRequest;
 use OCP\ISession;
 use OCP\IURLGenerator;
@@ -56,7 +55,7 @@ use OCP\Files\GenericFileException;
 use OCP\Files\NotFoundException;
 use OCP\Lock\LockedException;
 use OCP\Federation\Exceptions\BadRequestException;
-
+use Psr\Log\LoggerInterface;
 
 class EditorController extends Controller
 {
@@ -100,7 +99,7 @@ class EditorController extends Controller
      * @param IUserSession $userSession - current user session
      * @param IURLGenerator $urlGenerator - url generator service
      * @param IL10N $trans - l10n service
-     * @param ILogger $logger - logger
+     * @param  $logger - logger
      * @param OCA\Drawio\AppConfig $config - app config
      */
     public function __construct($AppName,
@@ -109,7 +108,7 @@ class EditorController extends Controller
                                 IUserSession $userSession,
                                 IURLGenerator $urlGenerator,
                                 IL10N $trans,
-                                ILogger $logger,
+                               LoggerInterface  $logger,
                                 AppConfig $config,
                                 IManager $shareManager,
                                 ISession $session,
