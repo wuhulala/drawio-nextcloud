@@ -12,7 +12,7 @@
 namespace OCA\Drawio;
 
 use OCP\IConfig;
-use OCP\ILogger;
+use Psr\Log\LoggerInterface;
 
 
 class AppConfig {
